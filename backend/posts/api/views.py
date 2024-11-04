@@ -7,6 +7,9 @@ from rest_framework.permissions import AllowAny
 from rest_framework_simplejwt.tokens import RefreshToken
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
+from rest_framework import viewsets
+from .models import Theater, Show, Performance, Ticket, Customer, Booking
+from .serializers import TheaterSerializer, ShowSerializer, PerformanceSerializer, TicketSerializer, CustomerSerializer, BookingSerializer
 
 # Register new users
 class RegisterView(APIView):
@@ -34,3 +37,26 @@ class LoginView(APIView):
             })
         return Response({"error": "Invalid credentials"}, status=400)
 
+class TheaterViewSet(viewsets.ModelViewSet):
+    queryset = Theater.objects.all()
+    serializer_class = TheaterSerializer
+
+class ShowViewSet(viewsets.ModelViewSet):
+    queryset = Show.objects.all()
+    serializer_class = ShowSerializer
+
+class PerformanceViewSet(viewsets.ModelViewSet):
+    queryset = Performance.objects.all()
+    serializer_class = PerformanceSerializer
+
+class TicketViewSet(viewsets.ModelViewSet):
+    queryset = Ticket.objects.all()
+    serializer_class = TicketSerializer
+
+class CustomerViewSet(viewsets.ModelViewSet):
+    queryset = Customer.objects.all()
+    serializer_class = CustomerSerializer
+
+class BookingViewSet(viewsets.ModelViewSet):
+    queryset = Booking.objects.all()
+    serializer_class = BookingSerializer
